@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: opip-prod
+  labels:
+    app.kubernetes.io/part-of: opip
+    environment: prod
