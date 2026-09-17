@@ -1,0 +1,33 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: opip-prod
+resources:
+  - ../../base
+  - namespace.yaml
+images:
+  - name: harbor.cloudgenius.ca/opip/opip-api
+    newTag: main
+  - name: harbor.cloudgenius.ca/opip/opip-frontend
+    newTag: main
+patches:
+  - target:
+      kind: Deployment
+      name: opip-api
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+  - target:
+      kind: Deployment
+      name: opip-frontend
+    patch: |-
+      - op: replace
+        path: /spec/replicas
+        value: 2
+  - target:
+      kind: Ingress
+      name: opip
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/host
+        value: opip.example.com
