@@ -35,6 +35,17 @@ spec:
             - name: http
               containerPort: 8000
               protocol: TCP
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: opip-api-runtime
+                  key: DATABASE_URL
+            - name: CORS_ORIGINS
+              valueFrom:
+                secretKeyRef:
+                  name: opip-api-runtime
+                  key: CORS_ORIGINS
           securityContext:
             allowPrivilegeEscalation: false
             runAsNonRoot: true
@@ -50,7 +61,7 @@ spec:
               memory: 512Mi
           readinessProbe:
             httpGet:
-              path: /health
+              path: /ready
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
