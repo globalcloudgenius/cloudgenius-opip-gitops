@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: opip
+  labels:
+    app.kubernetes.io/part-of: opip
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: opip.example.com
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: opip-api
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: opip-frontend
+                port:
+                  number: 3000
