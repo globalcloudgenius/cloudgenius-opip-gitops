@@ -2,6 +2,39 @@
 
 **Client overview:** [Client-facing case study](./CASE-STUDY.md)
 
+## Outcome & Evidence
+
+| Evidence | Result |
+|---|---|
+| Delivery model | GitOps; CI does not directly apply to the cluster |
+| Reconciliation | Argo CD |
+| Environment structure | Reusable base + dev/prod overlays |
+| Container hardening | Non-root, dropped capabilities, no privilege escalation, runtime-default seccomp |
+| Availability controls | Readiness and liveness probes |
+| Resource governance | CPU/memory requests and limits |
+| Secret handling | Secrets referenced externally; not stored in Git |
+| Image strategy | Immutable digest promotion model documented |
+
+**Proof:** Kubernetes manifests, Argo CD resources, Kustomize overlays, security settings, and the [client-facing case study](./CASE-STUDY.md) are included in this repository.
+
+## Architecture at a glance
+
+```mermaid
+flowchart LR
+    A[Application Repository] --> CI[GitHub Actions CI]
+    CI --> S[Tests / SAST / Secret Scan]
+    S --> B[Build / Image Scan / SBOM]
+    B --> H[Harbor Registry]
+    H --> C[Signing / Attestation]
+    C --> G[GitOps Repository]
+    G --> R[Argo CD]
+    R --> K[Kubernetes]
+    V[Vault] --> E[External Secrets Operator]
+    E --> K
+```
+
+---
+
 Public portfolio repository for the Kubernetes continuous-delivery side of the CloudGenius OPIP platform.
 
 ## Delivery model
