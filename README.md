@@ -1,5 +1,7 @@
 # CloudGenius OPIP GitOps
 
+**Client overview:** [Client-facing case study](./CASE-STUDY.md)
+
 Public portfolio repository for the Kubernetes continuous-delivery side of the CloudGenius OPIP platform.
 
 ## Delivery model
