@@ -60,3 +60,22 @@ HashiCorp Vault -> External Secrets Operator -> Kubernetes Secret -> workload
 ```
 
 The `harbor-pull` secret is referenced but never stored in this repository.
+
+---
+
+## Consulting relevance
+
+This repository demonstrates a GitOps operating model for teams that want controlled, auditable Kubernetes delivery rather than direct cluster mutation from CI.
+
+Typical consulting use cases include:
+
+- Kubernetes platform engineering;
+- Argo CD / GitOps adoption;
+- Kustomize environment design;
+- secure image promotion;
+- secrets-management architecture;
+- DevSecOps controls;
+- production delivery standards and technical leadership.
+
+**Consulting inquiries:** advisory@cloudgenius.ca · https://cloudgenius.ca
+
